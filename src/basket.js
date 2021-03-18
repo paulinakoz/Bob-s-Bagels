@@ -3,35 +3,42 @@ let Bagel = require('./bagel.js')
 class Basket {
     constructor(){
         //this.totalPrice = totalPrice;
-        this.contents = [];
+        this._contents = [];
         this.capacity = 5;
         this.isFull = false;
+        this._subtotal = 0;
+    }
+
+    get contents() {
+        return this._contents;
+    }
+
+    get subtotal(){
+        return this._subtotal;
     }
 
     addToBasket(bagel){
-        let price = Bagel.getPrice(bagel)
-        console.log(price);
-
-        if(this.contents.includes(bagel)){
-            this.contents.push(bagel);
+        if(this._contents.includes(bagel)){
             return 'This item is already in your basket'
         } else {
-            this.contents.push(bagel);
-            return this.contents;
+            this._contents.push(bagel);
+            this._subtotal += bagel.price;
+            return `Bagel ${bagel.name} - ${bagel.price}, has been added to your basket`;
         }
     }
 
     removeFromBasket(bagel){
-        if(this.contents.includes(bagel)){
-            this.contents.pop(bagel);
-            return this.contents;
+        if(this._contents.includes(bagel)){
+            this._contents.pop(bagel);
+            this._subtotal -= bagel.price;
+            return this._contents;
         } else {
             return 'This item is not in your basket';
         }
     }
 
     isBasketFull(){
-        if(this.contents.length === this.capacity){
+        if(this._contents.length === this.capacity){
             this.isFull = true;
             return this.isFull;
         } else {

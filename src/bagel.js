@@ -1,20 +1,35 @@
-let Basket = require('./basket.js')
+class Bagel {
+    constructor(SKU){
+        if(SKU === 'BGLO'){
+            this._SKU = SKU;
+            this._name = 'Onion';
+            this._price = 0.49;
+        }
 
-class Bagel{
-    constructor(){
-        this.bagels = { 
-            'salmon': 3.99,
-            'plain': 0.99,
-            'avocado': 4.20,
-            'egg': 1.99,
-            'nutella': 1.99,
+        if(SKU === 'BGLP'){
+            this._SKU = SKU;
+            this._name = 'Plain';
+            this._price = 0.39;
+        }
+
+        if(SKU === 'BGLE'){
+            this._SKU = SKU;
+            this._name = 'Everything';
+            this._price = 0.49;
         }
     }
 
-    getPrice(bagel){
-        let price = Object.values(this.bagels);
-        return price;
-    }    
+    get SKU(){
+        return this._SKU;
+    }
+    
+    get name(){
+        return this._name;
+    }
+
+    get price(){
+        return this._price;
+    }
 };
 
 module.exports = Bagel;

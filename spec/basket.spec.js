@@ -15,7 +15,7 @@ let bagel = new Bagel('plain');
 let result = basket.addToBasket(bagel);
 
 //Verify
-assertEquals(result.length, 1);
+assertEquals(basket.contents.length, 1);
 
 
 //Object | Message | properties | Output
@@ -32,18 +32,24 @@ result = basket.addToBasket(bagel)
 result = basket.removeFromBasket(bagel);
 
 //Verify
-assertEquals(result.length, 0);
+assertEquals(basket.contents.length, 0);
 
 //TEST 3 
 console.log('Checks if basket is full.')
 //Setup 
-basket = new Basket()
-bagel = new Bagel('plain');
+basket = new Basket();
+bagel = new Bagel('salmon', 3.99);
+bagel2 = new Bagel('salmon', 3.99);
+bagel3 = new Bagel('salmon', 3.99);
+bagel4 = new Bagel('salmon', 3.99);
+bagel5 = new Bagel('salmon', 3.99);
 
 //Execute
-for(let i = 0; i < 5; i++){
-    result = basket.addToBasket(bagel);
-}
+basket.addToBasket(bagel);
+basket.addToBasket(bagel2);
+basket.addToBasket(bagel3);
+basket.addToBasket(bagel4);
+basket.addToBasket(bagel5);
 
 result = basket.isBasketFull();
 
@@ -93,9 +99,26 @@ assertEquals(result, 'This item is already in your basket');
 console.log("Check the price of bagel before adding to basket");
 //Setup
 basket = new Basket();
-bagel = new Bagel();
+bagel = new Bagel('salmon', 3.99);
 
 //Execute 
-
+result = basket.addToBasket(bagel);
 
 //Verify
+assertEquals(result, `Bagel ${bagel.name} - ${bagel.price}, has been added to your basket`)
+
+//TEST 8 
+console.log("Checks the total sum of the bagels in my basket")
+//Setup
+basket = new Basket()
+bagel = new Bagel('salmon', 3.50);
+bagel2 = new Bagel('egg', 2.50)
+
+//Execute
+basket.addToBasket(bagel);
+basket.addToBasket(bagel2);
+
+result = basket.subtotal;
+
+//Verify 
+assertEquals(result, 6)
